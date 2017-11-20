@@ -60,10 +60,12 @@ public class CalculateService {
                 BigInteger price = new BigInteger(data[3]);
                 BigInteger count = new BigInteger(data[4]);
                 switch (data[1]) {
+                    //продажа
                     case "s":
                         client.getPapers().put(paper,client.getPapers().get(paper).subtract(count));
                         client.setDollars(client.getDollars().add(price.multiply(count)));
                         break;
+                    //покупка
                     case "b":
                         client.getPapers().put(paper,client.getPapers().get(paper).add(count));
                         client.setDollars(client.getDollars().subtract(price.multiply(count)));
