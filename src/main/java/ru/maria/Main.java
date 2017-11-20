@@ -14,7 +14,11 @@ public class Main {
     private static final String ORDERS_FILE = "orders.txt";
     private static final String RESULT_FILE = "result.txt";
 
-
+    /**
+     * Запуск программы
+     *
+     * @param args : 0 - файл с клиентами, 1 - файл с заявками, 3 - файл с результатами (Если не указаны берутся по умолчанию)
+     */
     public static void main(String[] args) {
         CalculateService calculateService = new CalculateService();
         Map<String, Client> clientList = calculateService.loadClients(args.length > 0 ? args[0] : CLIENT_FILE);
