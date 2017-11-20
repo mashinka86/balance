@@ -1,7 +1,5 @@
 package ru.maria.domain;
 
-import java.io.InputStream;
-import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Map;
 
@@ -25,10 +23,6 @@ public class Client {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public BigInteger getDollars() {
         return dollars;
     }
@@ -41,7 +35,4 @@ public class Client {
         return papers;
     }
 
-    public void setPapers(Map<Paper, BigInteger> papers) {
-        this.papers = papers;
-    }
 }

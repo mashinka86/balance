@@ -20,6 +20,8 @@ public class CalculateService {
 
     private final static Logger logger = LogManager.getLogger(CalculateService.class);
 
+    private static final String TAB = "\t";
+
     /**
      * Получение клиентов со счетами из файла
      * @param fileName имя файла
@@ -30,7 +32,7 @@ public class CalculateService {
         Map<String, Client> clients = new LinkedHashMap<>();
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             br.lines().forEach(line -> {
-                String[] data = line.split("\t");
+                String[] data = line.split(TAB);
                 Map<Paper, BigInteger> papers = new LinkedHashMap<>();
                 Arrays.asList(Paper.values()).forEach(paper -> papers.put(paper, new BigInteger(data[paper.getPosition()])));
                 String name = data[0];
@@ -52,7 +54,7 @@ public class CalculateService {
         logger.info(" start calculate with operations from file {}", fileName);
         try (BufferedReader br = new BufferedReader(new FileReader(fileName)))  {
             br.lines().forEach(line -> {
-                String[] data = line.split("\t");
+                String[] data = line.split(TAB);
                 Client client = clients.get(data[0]);
                 Paper paper = Paper.valueOf(data[2]);
                 BigInteger price = new BigInteger(data[3]);
@@ -89,7 +91,7 @@ public class CalculateService {
                 data.add(client.getName());
                 data.add(client.getDollars().toString());
                 client.getPapers().values().forEach(paper -> data.add(paper.toString()));
-                out.println(data.stream().collect(Collectors.joining("\t")));
+                out.println(data.stream().collect(Collectors.joining(TAB)));
             });
         } catch (Exception ex) {
             logger.error("error in write clients", ex);
