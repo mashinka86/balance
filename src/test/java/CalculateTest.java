@@ -1,10 +1,10 @@
 import org.junit.Before;
 import org.junit.Test;
 import ru.maria.domain.Client;
-import ru.maria.domain.Paper;
-import ru.maria.service.CalculateService;
+import ru.maria.service.FileService;
 
 import java.math.BigInteger;
+import java.util.Arrays;
 import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.hasItem;
@@ -16,11 +16,12 @@ import static org.junit.Assert.assertEquals;
  */
 public class CalculateTest {
 
-    private CalculateService calculateService = new CalculateService();
+    private FileService fileService = new FileService();
     private String clientFile;
     private String orderFile;
 
     private static final String CLIENT = "C1";
+    private static final String CLIENT_2 = "C2";
 
     @Before
     public void before() {
@@ -29,13 +30,15 @@ public class CalculateTest {
     }
 
     @Test
-    public void test() {
-        Map<String, Client> clients = calculateService.loadClients(clientFile);
+    public void test() throws Exception {
+        Map<String, Client> clients = fileService.loadClients(clientFile, Arrays.asList("A", "B", "C", "D"));
         assertThat(clients.keySet(), hasItem(CLIENT));
-        calculateService.calculate(orderFile, clients);
+        fileService.loadOrdersWithCalc(orderFile, clients);
         Client client = clients.get(CLIENT);
-        assertEquals(new BigInteger("12"), client.getDollars());
-        assertEquals(new BigInteger("6"), client.getPapers().get(Paper.D));
-        assertEquals(new BigInteger("1"), client.getPapers().get(Paper.B));
+        Client client2 = clients.get(CLIENT_2);
+        assertEquals(new BigInteger("6"), client.getDollars());
+        assertEquals(new BigInteger("4"), client.getPapers().get("D"));
+        assertEquals(new BigInteger("1"), client2.getPapers().get("D"));
+        assertEquals(new BigInteger("24"), client2.getDollars());
     }
 }

@@ -11,9 +11,9 @@ public class Client {
 
     private String name;
     private BigInteger dollars;
-    private Map<Paper,BigInteger> papers;
+    private Map<String, BigInteger> papers;
 
-    public Client(String name, BigInteger dollars, Map<Paper, BigInteger> papers) {
+    public Client(String name, BigInteger dollars, Map<String, BigInteger> papers) {
         this.name = name;
         this.dollars = dollars;
         this.papers = papers;
@@ -31,7 +31,7 @@ public class Client {
         this.dollars = dollars;
     }
 
-    public Map<Paper, BigInteger> getPapers() {
+    public Map<String, BigInteger> getPapers() {
         return papers;
     }
 
