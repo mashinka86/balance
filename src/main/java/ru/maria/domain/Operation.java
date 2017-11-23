@@ -1,6 +1,7 @@
 package ru.maria.domain;
 
 import java.math.BigInteger;
+import java.util.Objects;
 
 /**
  * Created by mariafedotova on 22.11.2017.
@@ -41,9 +42,9 @@ public class Operation {
 
     @Override
     public boolean equals(Object operation) {
-        if (operation instanceof Operation) {
+        if (operation != null && operation instanceof Operation) {
             Operation that = (Operation) operation;
-            return this.paper.equals(that.paper) && this.price.equals(that.price) && this.count.equals(that.count);
+            return Objects.equals(this.paper, that.paper) && Objects.equals(this.price, that.price) && Objects.equals(this.count, that.count);
         }
         return false;
     }
